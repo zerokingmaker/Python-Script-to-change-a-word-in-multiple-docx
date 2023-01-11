@@ -10,6 +10,11 @@ def replace_text_in_docx(file_path, old_text, new_text):
                 if old_text in inline[i].text:
                     text = inline[i].text.replace(old_text, new_text)
                     inline[i].text = text
+                for table in document.tables:
+        for row in table.rows:
+            for cell in row.cells:
+                for para in cell.paragraphs:
+                    para.text = para.text.replace(old_text, new_text)
     document.save(file_path)
     
 def search_and_replace(root_dir, old_text, new_text):
